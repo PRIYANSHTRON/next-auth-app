@@ -8,6 +8,14 @@
   --background-end-rgb: 255, 255, 255;
 }
 
+.loader{
+  height: 50px;
+  width: 50px;
+  border: rgb(69, 167, 243);
+  border-radius: 50%;
+  border-top:white
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
