@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
                 { status: 400 }
             );
         }
-        else if (!user.isverified) {
+        else if (!user.isVerified) {
             console.log('ye phasa hehehehe')
             return NextResponse.json(
                 {
