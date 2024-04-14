@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { set } from "mongoose";
 function page() {
     const router = useRouter();
 
@@ -12,6 +13,9 @@ function page() {
         email: "",
         password: "",
     });
+
+    const [error, setError] = useState(false);
+    const[errorMessage,setErrorMessage] = useState("")
 
     const [buttonDisabled, setButtonDisabled] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -23,8 +27,10 @@ function page() {
             console.log("signup succces", response);
             router.push("/aboutMe");
         } catch (error: any) {
+            setLoading(false)
             console.log("signup failed", error);
-            toast.error("signup failed");
+            setErrorMessage(error.response.data.msg)
+            setError(true)
         }
     };
 
@@ -40,6 +46,7 @@ function page() {
             <h1 className="text-white text-3xl my-4">
                 {loading ? "Loading..." : "Login"}
             </h1>
+            {error && <p className="bg-white px-4 p-2 text-red-500 md:font-bold m-4 rounded-md text-center text-[14px] md:text-[16px]">{errorMessage}</p>}
 
             <div className="bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <div className="mb-4">

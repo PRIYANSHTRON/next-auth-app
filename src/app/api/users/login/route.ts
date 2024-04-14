@@ -15,9 +15,20 @@ export async function POST(request: NextRequest) {
 
         const user = await Users.findOne({ email });
 
+
+
         if (!user) {
             return NextResponse.json(
                 { msg: "user does not exist" },
+                { status: 400 }
+            );
+        }
+        else if (!user.isverified) {
+            console.log('ye phasa hehehehe')
+            return NextResponse.json(
+                {
+                    msg: "User is not verified. Please check your inbox in case you've Signed up",
+                },
                 { status: 400 }
             );
         }
@@ -62,7 +73,7 @@ export async function POST(request: NextRequest) {
         });
 
         return response;
-        
+
     } catch (error: any) {
         return NextResponse.json({ error: error.message }, { status: 500 });
     }
